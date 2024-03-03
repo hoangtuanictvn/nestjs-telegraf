@@ -244,8 +244,8 @@ export class ListenersExplorerService
         ...args,
         async (ctx: Context, next: Function): Promise<void> => {
           const result = await listenerCallbackFn(ctx, next);
-          if (result) {
-            await ctx.reply(String(result));
+          if (result && result.data) {
+            await ctx.reply(String(result.data));
           }
           // TODO-Possible-Feature: Add more supported return types
         },
