@@ -48,9 +48,13 @@ export class TelegrafCoreModule implements OnApplicationShutdown {
     const telegrafBotProvider: Provider = {
       provide: telegrafBotName,
       useFactory: async () => {
-        const bot = await createBotFactory(options);
-        allBotsMap.set(telegrafBotName, bot);
-        return bot;
+        try {
+          const bot = await createBotFactory(options);
+          allBotsMap.set(telegrafBotName, bot);
+          return bot;
+        } catch (e) {
+          console.log(e)
+        }
       },
     };
 
